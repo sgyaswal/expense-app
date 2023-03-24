@@ -31,6 +31,7 @@ const getAllTransection = async (req, res) => {
 const deleteTransection = async (req, res) => {
   try {
     await transectionModel.findOneAndDelete({ _id: req.body.transacationId });
+    console.log()
     res.status(200).send("Transaction Deleted!");
   } catch (error) {
     console.log(error);
