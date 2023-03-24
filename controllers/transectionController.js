@@ -24,15 +24,14 @@ const getAllTransection = async (req, res) => {
     res.status(200).json(transections);
   } catch (error) {
     console.log(error);
-    res.status(500).json(erorr);
+    res.status(500).json(error);
   }
 };
 
 const deleteTransection = async (req, res) => {
   try {
     await transectionModel.findOneAndDelete({ _id: req.body.transacationId });
-    console.log()
-    res.status(200).send("Transaction Deleted!");
+    res.status(200).send("Transection Deleted!");
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
@@ -53,7 +52,7 @@ const editTransection = async (req, res) => {
 
 const addTransection = async (req, res) => {
   try {
-    // const newTransection = new transectionModel(req.body);
+    console.log(req.body)
     const newTransection = new transectionModel(req.body);
     await newTransection.save();
     res.status(201).send("Transection Created");
