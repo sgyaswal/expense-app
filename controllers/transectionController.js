@@ -1,64 +1,48 @@
-
-
 const transectionModel = require("../models/transectionModel");
 const moment = require("moment");
+const transectionService = require("../services/transectionService");
+
 const getAllTransection = async (req, res) => {
   try {
-    const { frequency, selectedDate, type } = req.body;
-    const transections = await transectionModel.find({
-      ...(frequency !== "custom"
-        ? {
-            date: {
-              $gt: moment().subtract(Number(frequency), "d").toDate(),
-            },
-          }
-        : {
-            date: {
-              $gte: selectedDate[0],
-              $lte: selectedDate[1],
-            },
-          }),
-      userid: req.body.userid,
-      ...(type !== "all" && { type }),
-    });
-    res.status(200).json(transections);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json(error);
+    return await transectionService.getAllTransectionService(
+      req.body.userid,
+      req.body.frequency,
+      req.body.selectedDate,
+      req.body.type,
+      res
+    );
+  } catch (err) {
+    // res.status(500).send("Internal Server Error");
   }
 };
 
 const deleteTransection = async (req, res) => {
   try {
-    await transectionModel.findOneAndDelete({ _id: req.body.transacationId });
-    res.status(200).send("Transection Deleted!");
-  } catch (error) {
-    console.log(error);
-    res.status(500).json(error);
+    return await transectionService.deleteTransectionService(
+      req.body.transacationId,
+      res
+    );
+  } catch (err) {
+    // res.status(500).send("Internal Server Error");
   }
 };
 const editTransection = async (req, res) => {
   try {
-    await transectionModel.findOneAndUpdate(
-      { _id: req.body.transacationId },
-      req.body.payload
+    return await transectionService.deleteTransectionService(
+      req.body.transacationId,
+      req.body.payload,
+      res
     );
-    res.status(200).send("Edit SUccessfully");
-  } catch (error) {
-    console.log(error);
-    res.status(500).json(error);
+  } catch (err) {
+    // res.status(500).send("Internal Server Error");
   }
 };
 
 const addTransection = async (req, res) => {
   try {
-    console.log(req.body)
-    const newTransection = new transectionModel(req.body);
-    await newTransection.save();
-    res.status(201).send("Transection Created");
-  } catch (error) {
-    console.log(error);
-    res.status(500).json(error);
+    return await transectionService.addTransectionService(req.body, res);
+  } catch (err) {
+    // res.status(500).send("Internal Server Error");
   }
 };
 

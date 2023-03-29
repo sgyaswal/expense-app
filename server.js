@@ -25,11 +25,11 @@ app.use("/api/v1/users", require("./routes/userRoute"));
 
 app.use("/api/v1/transections", require("./routes/transectionRoute"));
 
-app.use(express.static(path.join(__dirname,'./client/build')));
+// app.use(express.static(path.join(__dirname,'./client/build')));
 
-app.get("*",function(req,res){
-  res.sendFile(path.join(__dirname,"./client/build/index.html"));
-})
+// app.get("*",function(req,res){
+//   res.sendFile(path.join(__dirname,"./client/build/index.html"));
+// })
 //port
 const PORT = 8080 || process.env.PORT;
 

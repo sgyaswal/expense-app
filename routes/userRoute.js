@@ -13,4 +13,6 @@ router.post("/login", loginController);
 
 //POST || REG USER
 router.post("/register", registerController);
+
 module.exports = router;
+

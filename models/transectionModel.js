@@ -22,7 +22,6 @@ const transectionSchema = new mongoose.Schema(
     },
     description: {
       type: String,
-      required: [true, "discription is required"],
     },
     date: {
       type: Date,
@@ -33,4 +32,4 @@ const transectionSchema = new mongoose.Schema(
 );
 
 const transectionModel = mongoose.model("transections", transectionSchema);
-module.exports = transectionModel
+module.exports = transectionModel;
